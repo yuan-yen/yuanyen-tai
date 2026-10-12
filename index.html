@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yuan-Yen Tai</title>
+<meta name="description" content="Yuan-Yen Tai, Ph.D. — physicist turned machine-learning scientist. Patents, publications and projects in audio watermarking, search and ranking, and AI agents.">
+<meta property="og:title" content="Yuan-Yen Tai, Ph.D.">
+<meta property="og:description" content="Physicist turned machine-learning scientist. Patents, publications and projects.">
+<meta property="og:image" content="https://yuanyen-tai.me/yy-wide.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yuanyen-tai.me/">
+<link rel="canonical" href="https://yuanyen-tai.me/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c6b78'/%3E%3Cpath d='M8 32c6 0 6-14 12-14s6 28 12 28 6-28 12-28 6 14 12 14' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #fbfcfc;
+    --panel: #f1f4f6;
+    --ink: #172033;
+    --soft: #4a5468;
+    --faint: #7d879a;
+    --rule: #dde2e9;
+    --accent: #0c6b78;
+    --accent-soft: #e3f0f2;
+    --warm: #b86d12;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0e131c;
+      --panel: #151c28;
+      --ink: #e8ecf3;
+      --soft: #a9b3c4;
+      --faint: #76819a;
+      --rule: #252f40;
+      --accent: #5cc4d1;
+      --accent-soft: #14303a;
+      --warm: #e7a24a;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { font-family: "IBM Plex Sans", system-ui, sans-serif; color: var(--ink); background: var(--ground); font-size: 17px; line-height: 1.6; }
+  a { color: inherit; }
+  a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+
+  /* nav */
+  nav { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--ground) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--rule); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 56px; }
+  .brand { white-space: nowrap; font-family: "Fraunces", Georgia, serif; font-weight: 600; font-size: 18px; text-decoration: none; }
+  .links { display: flex; gap: 22px; font-size: 14px; }
+  .links a { text-decoration: none; color: var(--soft); }
+  .links a:hover { color: var(--accent); }
+
+  /* hero */
+  .hero { padding: 88px 0 0; }
+  .eyebrow { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+  h1 { font-family: "Fraunces", Georgia, serif; font-weight: 500; font-size: clamp(40px, 6.4vw, 74px); line-height: 1.0; letter-spacing: -0.02em; margin-top: 20px; text-wrap: balance; }
+  h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+  .lede { max-width: 62ch; margin-top: 28px; font-size: 19px; color: var(--soft); }
+  .lede strong { color: var(--ink); font-weight: 600; }
+  .top { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: center; }
+  .photo { display: block; width: 100%; height: auto; border-radius: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+  canvas#wave { display: block; width: 100%; height: 150px; margin-top: 44px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .stat { padding: 22px 0; }
+  .stat + .stat { border-left: 1px solid var(--rule); padding-left: 24px; }
+  .stat b { display: block; font-family: "Fraunces", serif; font-weight: 500; font-size: 44px; line-height: 1; }
+  .stat span { font-size: 14px; color: var(--soft); }
+
+  section { padding: 84px 0 0; }
+  h2 { font-family: "IBM Plex Mono", monospace; font-weight: 500; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); display: flex; align-items: center; gap: 14px; margin-bottom: 30px; }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+
+  /* path */
+  .path { list-style: none; position: relative; display: flex; flex-direction: column; gap: 34px; padding-left: 30px; }
+  .path::before { content: ""; position: absolute; left: 6px; top: 10px; bottom: 10px; width: 2px; background: var(--rule); }
+  .path > li { position: relative; display: grid; grid-template-columns: 150px 1fr; gap: 20px; }
+  .path > li::before { content: ""; position: absolute; left: -30px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--ground); border: 2px solid var(--accent); }
+  .path > li.now::before { background: var(--warm); border-color: var(--warm); }
+  .when { font-family: "IBM Plex Mono", monospace; font-size: 13.5px; color: var(--faint); padding-top: 5px; }
+  .path h3 { font-family: "Fraunces", serif; font-weight: 500; font-size: 26px; line-height: 1.2; }
+  .path h3 small { font-family: "IBM Plex Sans", sans-serif; font-size: 14.5px; font-weight: 400; color: var(--soft); margin-left: 6px; }
+  .path ul { list-style: none; margin-top: 8px; display: flex; flex-direction: column; gap: 6px; color: var(--soft); max-width: 62ch; }
+  .path ul strong { color: var(--ink); font-weight: 600; }
+
+  .ref { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--accent); text-decoration: none; white-space: nowrap; }
+  .ref:hover { text-decoration: underline; }
+  /* projects */
+  .projects { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .proj { display: flex; flex-direction: column; gap: 10px; padding: 24px; background: var(--panel); border-radius: 10px; text-decoration: none; border: 1px solid transparent; transition: border-color .15s, transform .15s; }
+  a.proj:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .proj h3 { font-family: "Fraunces", serif; font-weight: 500; font-size: 25px; }
+  .proj p { font-size: 15.5px; color: var(--soft); flex: 1; }
+  .proj .go { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--accent); }
+  .more { margin-top: 16px; font-size: 15.5px; color: var(--soft); }
+  .more strong { color: var(--ink); font-weight: 600; }
+
+  /* patents */
+  .patents { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0 40px; }
+  .patents li { padding: 18px 0; border-top: 1px solid var(--rule); }
+  .patents h3 { font-size: 17.5px; font-weight: 600; }
+  .patents .n { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 6px; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  .patents .n a { color: var(--accent); text-decoration: none; }
+  .patents .n a:hover { text-decoration: underline; }
+
+  /* publications */
+  .group { font-weight: 600; font-size: 17px; margin: 0 0 12px; }
+  .group span { font-family: "IBM Plex Mono", monospace; font-weight: 400; font-size: 12.5px; color: var(--faint); margin-left: 8px; }
+  .pubs { list-style: none; counter-reset: pub; }
+  .pubs li { counter-increment: pub; position: relative; padding: 11px 0 11px 40px; border-top: 1px solid var(--rule); font-size: 15px; line-height: 1.5; color: var(--soft); }
+  .pubs li::before { content: counter(pub, decimal-leading-zero); position: absolute; left: 0; top: 13px; font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--faint); }
+  .pubs .t { color: var(--ink); font-weight: 500; }
+  .pubs .me { color: var(--ink); font-weight: 600; }
+  .pubs .v { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+  .pubs a { color: var(--accent); text-decoration: none; }
+  .pubs a:hover { text-decoration: underline; }
+  details { margin-top: 34px; }
+  summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: 10px; }
+  summary::-webkit-details-marker { display: none; }
+  summary .group { margin: 0; }
+  summary .tog { margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; color: var(--accent); }
+  details[open] summary .tog::before { content: "Hide"; }
+  details:not([open]) summary .tog::before { content: "Show all 13"; }
+  details .pubs { margin-top: 12px; }
+
+  /* talks + education */
+  .two { display: grid; grid-template-columns: 1.4fr 1fr; gap: 56px; }
+  .talks { list-style: none; }
+  .talks li { display: grid; grid-template-columns: 56px 1fr; padding: 9px 0; border-top: 1px solid var(--rule); font-size: 15.5px; color: var(--soft); }
+  .talks .y { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--accent); padding-top: 2px; }
+  .talks .hi { color: var(--ink); font-weight: 600; }
+  .edu { background: var(--panel); border-radius: 10px; padding: 26px; align-self: start; }
+  .edu h3 { font-family: "Fraunces", serif; font-weight: 500; font-size: 26px; line-height: 1.2; }
+  .edu p { color: var(--soft); font-size: 15.5px; margin-top: 6px; }
+  .award { display: inline-block; margin-top: 14px; padding: 6px 12px; background: var(--accent-soft); border-radius: 999px; font-size: 14px; }
+  .award b { color: var(--accent); }
+
+  footer { margin-top: 96px; border-top: 1px solid var(--rule); padding: 30px 0 44px; font-size: 14px; color: var(--faint); }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 16px; }
+    .links { gap: 12px; font-size: 12.5px; }
+    .brand { font-size: 16px; }
+    .links .opt { display: none; }
+    .hero { padding-top: 56px; }
+    .top { grid-template-columns: 1fr; gap: 28px; }
+    .brand img { display: none; }
+    .photo { max-width: 420px; }
+    .lede { font-size: 17px; }
+    canvas#wave { height: 110px; margin-top: 32px; }
+    .stat b { font-size: 32px; }
+    .stat + .stat { padding-left: 14px; }
+    .stat span { font-size: 12.5px; display: block; line-height: 1.35; margin-top: 4px; }
+    section { padding-top: 60px; }
+    .path > li { grid-template-columns: 1fr; gap: 2px; }
+    .path h3 small { display: block; margin: 2px 0 0; }
+    .projects, .patents, .two { grid-template-columns: 1fr; }
+    .two { gap: 36px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .proj { transition: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="yy.jpg" alt="">Yuan-Yen Tai</a>
+    <div class="links">
+      <a href="#path">Path</a>
+      <a href="#projects">Projects</a>
+      <a href="#patents">Patents</a>
+      <a href="#publications">Publications</a>
+      <a class="opt" href="#talks">Talks</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <p class="eyebrow">Yuan-Yen Tai, Ph.D. · Machine-learning scientist</p>
+        <h1>From theoretical physics to <em>machine learning.</em></h1>
+        <p class="lede">I started in theoretical physics and mathematics, and have spent the past decade researching and engineering scalable solutions for high-complexity systems. From Amazon to Apple, I have taken <strong>five patented machine-learning innovations</strong> from concept to deployment, in large-scale infrastructure and on edge devices alike.</p>
+      </div>
+      <img class="photo" src="yy-wide.jpg" width="512" height="403" alt="Yuan-Yen Tai standing between two large letter Ys, one blue on yellow and one yellow on blue">
+    </div>
+    <canvas id="wave" aria-hidden="true"></canvas>
+    <div class="stats">
+      <div class="stat"><b>5</b><span>patented ML innovations</span></div>
+      <div class="stat"><b>19</b><span>scientific publications</span></div>
+      <div class="stat"><b>10+</b><span>years of research</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="path">
+  <div class="wrap">
+    <h2>Path</h2>
+    <ol class="path">
+      <li class="now">
+        <span class="when">Feb 2026 – Present</span>
+        <div><h3>The Biological Computing Co.</h3>
+          <ul><li>Built the adapter model behind the company's <strong>first public, real-time interactive demo</strong>. Added to the open-source Oasis video model, it uses under 3% more parameters, keeps long outputs stable, and holds quality at fewer diffusion steps while running several times faster. <a class="ref" href="https://www.tbc.co/post/a-sense-of-space-and-time-optimizing-interactive-video-generation" target="_blank" rel="noopener">Read the blog post ↗</a> · <a class="ref" href="https://www.tbc.co/neural-optimizer" target="_blank" rel="noopener">Try the demo ↗</a></li>
+            <li>Trained a new <strong>video generation model</strong> on the company's in-house bio-derived adapter: diffusion runs several times faster with no loss in output quality. Trained on an 8-GPU Nebius cluster.</li>
+            <li>Now building the third high-performance adapter and <strong>leading a team</strong> across training, benchmark validation, quantization and efficiency optimization.</li></ul></div>
+      </li>
+      <li>
+        <span class="when">2021 – 2026</span>
+        <div><h3>Apple</h3>
+          <ul>
+            <li>Led the development and launch of an <strong>end-to-end agentic RAG product</strong>: a hybrid chain of four models, each above 95% accuracy.</li>
+            <li>Invented and filed a patent for an <strong>on-screen codex</strong> with a computer-vision model.</li>
+            <li>Designed, implemented and patented a <strong>hybrid Graph + LLM</strong> search and ranking algorithm.</li>
+          </ul></div>
+      </li>
+      <li>
+        <span class="when">2019 – 2021</span>
+        <div><h3>CargoMetrics</h3>
+          <ul>
+            <li>Led development of <strong>large-scale data pre-processing</strong> algorithms on the PySpark framework.</li>
+            <li>Led and designed the model for <strong>classifying and tracking cargo-ship movements</strong>.</li>
+          </ul></div>
+      </li>
+      <li>
+        <span class="when">2017 – 2019</span>
+        <div><h3>Amazon</h3>
+          <ul>
+            <li>Invented an <strong>audio watermark algorithm</strong> that broke through the physical limits of transmitting a watermark signal through the air.</li>
+            <li>Lead scientist for the on-device and backend audio watermark <strong>encoding / decoding</strong> algorithm.</li>
+          </ul></div>
+      </li>
+      <li>
+        <span class="when">2014 – 2017</span>
+        <div><h3>Los Alamos National Lab <small>Postdoctoral researcher</small></h3>
+          <ul><li>Multidimensional <strong>quantum-physics modeling</strong> research with GPU-accelerated computation.</li></ul></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Side projects</h2>
+    <div class="projects">
+      <a class="proj" href="https://www.audionyx.ai/" target="_blank" rel="noopener">
+        <h3>Audionyx</h3>
+        <p>Audio identity for the GenAI era: a high-performance audio sign encoding / decoding system, from the device to the backend.</p>
+        <span class="go">audionyx.ai ↗</span>
+      </a>
+      <a class="proj" href="https://www.aowl.app/" target="_blank" rel="noopener">
+        <h3>AOWL</h3>
+        <p>Audio Watermark Lab: invisible signatures that make a voice traceable to its origin.</p>
+        <span class="go">aowl.app ↗</span>
+      </a>
+      <a class="proj" href="https://avengents.ai/" target="_blank" rel="noopener">
+        <h3>Avengents</h3>
+        <p>One shared room for people and AI coding agents across machines, on iPhone, iPad, Mac and the web. Many colleagues at my company now use it to join their agents and finish projects together, and work faster for it.</p>
+        <span class="go">avengents.ai ↗</span>
+      </a>
+    </div>
+    <p class="more">Also: <strong>neuron digitization</strong>, an algorithm for pre- and post-trained LLM modeling.</p>
+  </div>
+</section>
+
+<section id="patents">
+  <div class="wrap">
+    <h2>Patents</h2>
+    <ul class="patents">
+      <li><h3>Ranking of content based on implied relationships</h3>
+        <div class="n"><a href="https://patents.google.com/patent/US20250258883A1/en" target="_blank" rel="noopener">US20250258883A1</a><a href="https://patents.google.com/patent/EP4418144A1/en" target="_blank" rel="noopener">EP4418144A1</a></div></li>
+      <li><h3>Techniques for managing animated codes</h3>
+        <div class="n"><a href="https://patents.google.com/patent/WO2024249037A1/en" target="_blank" rel="noopener">WO2024249037A1</a><a href="https://patents.google.com/patent/US20240403587A1/en" target="_blank" rel="noopener">US20240403587A1</a></div></li>
+      <li><h3>Automatic app image generation and selection</h3>
+        <div class="n"><a href="https://patents.google.com/patent/US20250265066A1/en" target="_blank" rel="noopener">US20250265066A1</a></div></li>
+      <li><h3>Audio watermark encoding / decoding</h3>
+        <div class="n"><a href="https://patents.google.com/patent/US10950249B2/en" target="_blank" rel="noopener">US10950249B2</a><a href="https://patents.google.com/patent/US20200098379A1/en" target="_blank" rel="noopener">US20200098379A1</a><a href="https://patents.google.com/patent/WO2020068401A1/en" target="_blank" rel="noopener">WO2020068401A1</a></div></li>
+    </ul>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <h2>Publications</h2>
+
+    <p class="group">Machine learning &amp; signal processing <span>2017 – 2023</span></p>
+    <ol class="pubs">
+      <li><span class="me">Yuan-Yen Tai</span> et al., <span class="t">Automatic App Image Generation and Selection.</span> Review in progress for SIGIR 2024; related patent submitted (2023).</li>
+      <li><span class="me">Yuan-Yen Tai</span> et al., <span class="t">Large-Language-Model boosted Graph structure for personalized-PageRank recommendation.</span> Review in progress; related patent submitted (2023).</li>
+      <li><span class="me">Yuan-Yen Tai</span> et al., <span class="t">Recreating and Specializing PageRank for Online Services.</span> Apple internal ML summit (2022).</li>
+      <li><span class="me">Yuan-Yen Tai</span> et al., <span class="t">Fast and scalable geometric clustering algorithm for privacy enhanced ML applications.</span> Apple internal ML summit (2022).</li>
+      <li><span class="me">Yuan-Yen Tai</span> and Mohamed F. Mansour, <span class="t">Audio watermarking over the air with modulated self-correlation.</span> <a class="v" href="https://doi.org/10.1109/ICASSP.2019.8683329" target="_blank" rel="noopener">ICASSP 2019</a> (2019).</li>
+      <li><span class="me">Yuan-Yen Tai</span>, <span class="t">An efficient clustering algorithm from the measure of local Gaussian distribution.</span> <a class="v" href="https://arxiv.org/abs/1709.08470" target="_blank" rel="noopener">arXiv:1709.08470</a> (2017).</li>
+    </ol>
+
+    <details>
+      <summary><p class="group">Condensed-matter physics <span>2006 – 2019</span></p><span class="tog"></span></summary>
+      <ol class="pubs" style="counter-reset: pub 6;">
+        <li>Hongchul Choi, <span class="me">Yuan-Yen Tai</span> and Jian-Xin Zhu, <span class="t">Strong-Correlation Derived Spin-Fermion Model for Skyrmions in MnGe.</span> <span class="v">PRB 99, 134437</span> (2019).</li>
+        <li><span class="me">Yuan-Yen Tai</span> and Jian-Xin Zhu, <span class="t">Local charge variation enhanced spin canting of BiFeO<sub>3</sub>/La<sub>0.7</sub>Sr<sub>0.3</sub>MnO<sub>3</sub> heterostructure.</span> <a class="v" href="https://arxiv.org/abs/1603.03107" target="_blank" rel="noopener">arXiv:1603.03107</a>.</li>
+        <li><span class="me">Yuan-Yen Tai</span>, H. Choi, T. Ahmed, C. S. Ting and J.-X. Zhu, <span class="t">Edge states and local electronic structure around an adsorbed impurity in a topological superconductor.</span> <span class="v">PRB 92, 174514</span> (2015).</li>
+        <li><span class="me">Yuan-Yen Tai</span>, C.-C. J. Wang, M. J. Graf, J.-X. Zhu and C. S. Ting, <span class="t">Emergent topological mirror insulator in t<sub>2g</sub>-orbital systems.</span> <span class="v">PRB 91, 041111(R)</span> (2015).</li>
+        <li>Y. Zhao, <span class="me">Yuan-Yen Tai</span> and C. S. Ting, <span class="t">Phase diagram of the isovalent phosphorous-substituted 122-type iron pnictides.</span> <span class="v">PRB 91, 205110</span> (2015).</li>
+        <li>Bo Li, L. Pan, <span class="me">Yuan-Yen Tai</span>, M. J. Graf, J.-X. Zhu, K. E. Bassler and C. S. Ting, <span class="t">A unified description of superconducting pairing symmetry in electron-doped Fe-based-122 compounds.</span> <span class="v">PRB 90, 220509(R)</span> (2015).</li>
+        <li>Y. Fang, <span class="me">Yuan-Yen Tai</span>, J. Deng, C. Wu, X. Ding, J. Sun and E. K. H. Salje, <span class="v">Supercond. Sci. Technol. 28, 095004</span> (2015).</li>
+        <li>L. Pan, J. Li, <span class="me">Yuan-Yen Tai</span>, M. J. Graf, J.-X. Zhu and C. S. Ting, <span class="t">Evolution of quasiparticle states with and without a Zn impurity in doped 122 iron pnictides.</span> <span class="v">PRB 90, 134501</span> (2014).</li>
+        <li>L. Pan, J. Li, <span class="me">Yuan-Yen Tai</span>, M. J. Graf, J.-X. Zhu and C. S. Ting, <span class="t">Evolution of the Fermi surface topology in doped 122 iron pnictides.</span> <span class="v">PRB 88, 214510</span> (2013).</li>
+        <li>H. Chen, <span class="me">Yuan-Yen Tai</span>, C. S. Ting, M. J. Graf, J. Dai and J.-X. Zhu, <span class="t">Disorder effects in multiorbital s<sub>±</sub>-wave superconductors: Implications for Zn-doped BaFe<sub>2</sub>As<sub>2</sub> compounds.</span> <span class="v">PRB 88, 184509</span> (2013).</li>
+        <li><span class="me">Yuan-Yen Tai</span>, J.-X. Zhu, M. J. Graf and C. S. Ting, <span class="t">Calculated phase diagram of doped BaFe<sub>2</sub>As<sub>2</sub> superconductor in a C<sub>4</sub>-symmetry breaking model.</span> <span class="v">EPL 103, 67001</span> (2013).</li>
+        <li><span class="me">Yuan-Yen Tai</span>, J.-X. Zhu, M. J. Graf and C. S. Ting, <span class="t">Fermi surface evolution and checker-board block-spin antiferromagnetism in A<sub>x</sub>Fe<sub>2-y</sub>Se<sub>2</sub>.</span> <span class="v">PRB 86, 134512</span> (2012).</li>
+        <li><span class="me">Yuan-Yen Tai</span>, P.-C. Li and H.-C. Tseng, <span class="t">A two-dimensional modified Levy-walk model for the DNA sequences.</span> <span class="v">Physica A 369, 688</span> (2006).</li>
+      </ol>
+    </details>
+  </div>
+</section>
+
+<section id="talks">
+  <div class="wrap">
+    <h2>Talks &amp; education</h2>
+    <div class="two">
+      <ul class="talks">
+        <li><span class="y">2019</span><span><span class="hi">Lecture speaker</span>, IEEE ICASSP 2019, Brighton, UK</span></li>
+        <li><span class="y">2018</span><span><span class="hi">Invited speaker</span>, audio summit, Amazon Lab126, Sunnyvale</span></li>
+        <li><span class="y">2018</span><span>Live demo of watermark over the air, Q2 All-Hands, Amazon Boston</span></li>
+        <li><span class="y">2016</span><span><span class="hi">Invited speaker</span>, Brookhaven National Laboratory</span></li>
+        <li><span class="y">2016</span><span>Oral presentation, APS March Meeting, Baltimore</span></li>
+        <li><span class="y">2015</span><span>BLABS seminar talk, LANL T-4 Group</span></li>
+        <li><span class="y">2015</span><span>Oral presentation, CNLS 35th Annual Conference</span></li>
+        <li><span class="y">2015</span><span>Oral presentation, APS March Meeting, San Antonio</span></li>
+        <li><span class="y">2014</span><span>Oral presentation, APS March Meeting, Denver</span></li>
+        <li><span class="y">2013</span><span>Oral presentation, APS March Meeting, Baltimore</span></li>
+        <li><span class="y">2013</span><span>Oral presentation, TcSUH Semiannual Symposium</span></li>
+        <li><span class="y">2012</span><span>Oral presentation, APS March Meeting, Boston</span></li>
+      </ul>
+      <div class="edu">
+        <p class="eyebrow">Education</p>
+        <h3 style="margin-top:10px">Ph.D., Physics</h3>
+        <p>Condensed Matter Theory<br>University of Houston, Houston, TX · 2014</p>
+        <span class="award"><b>1st Place</b> · TcSUH Research Symposium</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Yuan-Yen Tai</span>
+    <span class="mono">yuanyen-tai.me</span>
+  </div>
+</footer>
+
+<script>
+  // Hero motif: a carrier wave under a slow envelope, sampled on lattice sites.
+  (function () {
+    var c = document.getElementById("wave"), g = c.getContext("2d");
+    var still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+    function draw(t) {
+      var r = window.devicePixelRatio || 1, w = c.clientWidth, h = c.clientHeight;
+      if (c.width !== w * r || c.height !== h * r) { c.width = w * r; c.height = h * r; }
+      g.setTransform(r, 0, 0, r, 0, 0);
+      g.clearRect(0, 0, w, h);
+      var accent = css("--accent"), rule = css("--rule"), mid = h / 2, amp = h * 0.42;
+      function y(x) {
+        var u = x / w;
+        var env = 0.18 + 0.82 * Math.pow(Math.sin(Math.PI * u), 2) * (0.62 + 0.38 * Math.cos(u * 9 - t * 0.6));
+        return mid + amp * env * Math.sin(x / 9 - t * 1.4);
+      }
+      g.strokeStyle = rule; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(0, mid); g.lineTo(w, mid); g.stroke();
+      g.strokeStyle = accent; g.lineWidth = 1.6; g.lineJoin = "round";
+      g.beginPath();
+      for (var x = 0; x <= w; x += 2) { if (x) g.lineTo(x, y(x)); else g.moveTo(x, y(x)); }
+      g.stroke();
+      g.fillStyle = accent;
+      for (var s = 14; s < w; s += 28) { g.beginPath(); g.arc(s, y(s), 2.6, 0, 6.2832); g.fill(); }
+    }
+    if (still) { draw(0); window.addEventListener("resize", function () { draw(0); }); return; }
+    (function loop(ms) { draw(ms / 1000); requestAnimationFrame(loop); })(0);
+  })();
+</script>
+</body>
+</html>
